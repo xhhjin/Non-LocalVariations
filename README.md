@@ -1,4 +1,4 @@
-# Non-LocalVariations
+# Non-Local Variations
 Matlab code of Non-Local Variations (NLV) algorithm.
 
 **************************************************************************

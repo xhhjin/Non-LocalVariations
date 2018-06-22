@@ -58,9 +58,10 @@ CorrectedImg = ApplyColorTrans(Res.A, rgb2ycbcr(img));
 % and corresponding transformation
 res_exagg = VisualizeExaggColor(img, Res(1).A, 5);
 %%
-figure;
+%figure;
 subplot(1,3,1); imshow(img,[]); title('Input');
 subplot(1,3,2); imshow(CorrectedImg,[]); title('Corrected');
-subplot(1,3,3); imshow(res_exagg.Ie, []); title('Exaggerated');
+subplot(1,3,3); imshow(img, []); title('Exaggerated, press <-- or -->');
+%subplot(1,3,3); imshow(res_exagg.Ie, []); title('Exaggerated');
 
 

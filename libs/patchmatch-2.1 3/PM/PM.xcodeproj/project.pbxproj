@@ -1,0 +1,80 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		AAAA47291AE834A0009B1152 /* nnmex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = nnmex.m; path = ../nnmex.m; sourceTree = "<group>"; };
+		AAAA472A1AE8355C009B1152 /* knn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = knn.cpp; path = ../knn.cpp; sourceTree = "<group>"; };
+		AAAA472B1AE83752009B1152 /* nnmex.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = nnmex.cpp; path = ../nnmex.cpp; sourceTree = "<group>"; };
+		AAAA472C1AE838DE009B1152 /* nnmex.mexmaci64 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; name = nnmex.mexmaci64; path = ../nnmex.mexmaci64; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AA2ABFD21AE834700010004F = {
+			isa = PBXGroup;
+			children = (
+				AAAA472C1AE838DE009B1152 /* nnmex.mexmaci64 */,
+				AAAA472B1AE83752009B1152 /* nnmex.cpp */,
+				AAAA472A1AE8355C009B1152 /* knn.cpp */,
+				AAAA47291AE834A0009B1152 /* nnmex.m */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		AA2ABFD31AE834700010004F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+			};
+			buildConfigurationList = AA2ABFD61AE834700010004F /* Build configuration list for PBXProject "PM" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AA2ABFD21AE834700010004F;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		AA2ABFD41AE834700010004F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		AA2ABFD51AE834700010004F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA2ABFD61AE834700010004F /* Build configuration list for PBXProject "PM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2ABFD41AE834700010004F /* Debug */,
+				AA2ABFD51AE834700010004F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA2ABFD31AE834700010004F /* Project object */;
+}

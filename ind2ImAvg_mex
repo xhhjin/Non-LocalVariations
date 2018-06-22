@@ -1,0 +1,83 @@
+#include <mex.h>
+#include <matrix.h>
+
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+{
+    double *im = mxGetPr(prhs[0]);
+    int *X = (int*)mxGetData(prhs[1]);
+    int *Y = (int*)mxGetData(prhs[2]);
+    int *Z = (int*)mxGetData(prhs[3]);
+    
+    
+    int patch_row = mxGetScalar(prhs[4]);
+    int patch_col = mxGetScalar(prhs[5]);
+    int patch_depth = mxGetScalar(prhs[6]);
+    const int *im_sz = mxGetDimensions(prhs[0]);
+    const int *ind_sz = mxGetDimensions(prhs[1]);
+    const int d = mxGetNumberOfDimensions(prhs[1]);
+    
+    int nrows = im_sz[0];
+    int ncols = im_sz[1];
+    int nframes = im_sz[2];
+    
+    int nknn = 1;
+    if(d>3){
+        nknn = ind_sz[3];
+    }
+    
+    mexPrintf("Input video of size %d x %d x %d\n", nrows, ncols, nframes);
+    mexPrintf("K=%d NN\n", nknn);
+    
+    
+    
+    plhs[0] = mxCreateNumericArray(mxGetNumberOfDimensions(prhs[0]), im_sz, mxDOUBLE_CLASS,mxREAL);
+    double *OUT = (double *)mxGetData(plhs[0]);
+    mxArray *c = mxCreateNumericArray(mxGetNumberOfDimensions(prhs[0]), im_sz, mxDOUBLE_CLASS,mxREAL);
+    double *COUNT = (double *)mxGetData(c);
+    
+    
+    int j=0;
+    // Loop over all pixels
+    for (int c = 0 ; c < ncols-patch_col+1 ; c++) // cols
+    {
+        for (int r = 0 ; r < nrows-patch_row+1 ; r++) //rows
+        {
+            for (int z = 0 ; z < nframes-patch_depth+1 ; z++) // time/depth
+            {
+                for (int k=0; k < nknn; k++)
+                {
+                    int xi = X[r + nrows*(c+ncols*z + ncols*nframes*k)]-1;
+                    int yi = Y[r + nrows*(c+ncols*z + ncols*nframes*k)]-1;
+                    int zi = Z[r + nrows*(c+ncols*z+ ncols*nframes*k)]-1;
+                    
+                    for (int prow = 0; prow < patch_row; prow++)
+                    {
+                        for (int pcol = 0; pcol < patch_col; pcol++)
+                        {
+                            for (int pdepth = 0; pdepth < patch_depth; pdepth++)
+                            {
+                                double a = im[xi+pcol + nrows*(yi+prow+ncols*(zi+pdepth))];
+                                OUT[r + pcol+nrows*(c+prow+ncols*(z+pdepth))] += a ;
+                                COUNT[r + pcol+nrows*(c+prow+ncols*(z+pdepth))] +=1;
+                            }
+                        }
+                    }
+                } // knn
+            } // time
+            
+        } // rows
+    } // cols
+    
+    
+     for (int c = 0 ; c < ncols-patch_col+1 ; c++) // cols
+    {
+        for (int r = 0 ; r < nrows-patch_row+1 ; r++) //rows
+        {
+            for (int z = 0 ; z < nframes-patch_depth+1 ; z++) // time/depth
+            {
+                OUT[r +nrows*(c+ncols*z)] = OUT[r +nrows*(c+ncols*z)]/COUNT[r +nrows*(c+ncols*z)];
+            }
+        }
+     }
+    
+}
